@@ -22,11 +22,4 @@ public class BoardTest {
         assertThat(test.squareAt(0,0)).isEqualTo(square);
 
     }
-
-    @Test
-    public void testBoardNull()
-    {
-        Board test = new Board(new Square[][] {{ null }});
-        assertThat(test.squareAt(0,0)).isEqualTo(null);
-    }
 }
