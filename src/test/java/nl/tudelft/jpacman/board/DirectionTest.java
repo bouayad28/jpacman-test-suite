@@ -26,7 +26,7 @@ public class DirectionTest {
     @Test
     void testSouth() {
         Direction south = Direction.valueOf("SOUTH");
-        assertThat(south.getDeltaY()).isEqualTo(-1);
+        assertThat(south.getDeltaY()).isEqualTo(1);
     }
 
     /**
