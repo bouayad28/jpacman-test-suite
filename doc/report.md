@@ -34,7 +34,7 @@ This change causes the neighbour maps of the squares to receive the incorrect sq
 
 ### Question 12
 
-![Domain matrix](images/domain_matrix.png)
+![Board boundary check domain matrix](images/domain_matrix.png)
 
 ### Question 14
 
@@ -52,6 +52,6 @@ The advantages of such an approach is that any changes that happen to a class in
  
 A reason not to test private methods is that they are not part of the public interface of the unit (class) that is being tested. Any mistakes in private methods that are used in a certain way by methods that are part of the public interface can be caught by tests for those methods. Because these private methods are always used by other methods, it does not make sense to test them in isolation.
  
- ### Question 18
+### Question 18
  
  Based on our newly created classes, the adequacy of JPACMAN has increased as through our tests it was established that the nextAiMove method of the Clyde and Inky classes and the withinBorders method of the Board class behave as expected. As we only committed code after it was checked by the Checkstyle, PMD and Spotbugs plugin, we never run into troubles with the continuous integration server testing. Finally, we committed and pushed onto a branch for every section of the assignment i.e. once for boundary testing. In addition, we varied who carried out the git interactions.
