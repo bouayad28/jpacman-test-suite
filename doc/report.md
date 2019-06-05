@@ -55,3 +55,281 @@ A reason not to test private methods is that they are not part of the public int
 ### Question 18
  
  Based on our newly created classes, the adequacy of JPACMAN has increased as through our tests it was established that the nextAiMove method of the Clyde and Inky classes and the withinBorders method of the Board class behave as expected. As we only committed code after it was checked by the Checkstyle, PMD and Spotbugs plugin, we never run into troubles with the continuous integration server testing. Finally, we committed and pushed onto a branch for every section of the assignment i.e. once for boundary testing. In addition, we varied who carried out the git interactions.
+
+## Assignment 2
+
+### Question 3
+
+For testing the start method of the game class, we achieved 100% class coverage, 42% method coverage, 54% line coverage and 100% branch coverage.
+
+### Question 4
+
+See figure 2.
+
+![Decision table for collisions](images/decision_table.png)
+
+### Question 7
+
+Originally, neither the `CollisionInteractionMap` nor the `DefaultPlayerInteractionMap` were tested. What was partially tested was the `PlayerCollisions` class, namely mostly by the `SmokeScreen` test. The only interactions that were tested were between players and ghosts, pellet interactions were not tested.
+
+With the additional new tests all combinations between players, ghosts and pellets are tested, in addition to collisions with units for which no collision behaviour is defined. The behaviour of the `CollisionInteractionMap` is still not directly tested, only indirectly via `DefaultPlayerInteractionMap`. Because of the high complexity of this class dedicated unit tests would be very useful to ensure it functions correctly.
+
+### Question 8
+
+With random numbers, one might be interested in whether or not the distribution is actually random. To test this, one can use fuzzing to generate random input values and then plot the resulting outcome or conduct further distribution analysis.
+
+Another possibility is to instead use the option of the `Random` class to provide a seed for the random number generation. If we for a test always use the same seed, the output of the random number generator will always give the same values. These values or their consequences can then be checked against.
+
+### Question 9
+
+For `LauncherSmokeTest` the flakiness is caused by the partially random movement of the ghosts during the sleep period because of which the death of Pacman is likely but not guaranteed. An indication of this test's flakiness can be seen in that it is quite large.
+
+Tests can become flaky when what it tests does not solely depend on the inputs provided by the test anymore. Especially when external tools are used, larger tests are much more likely to be flaky because they have more moving parts.
+
+### Question 10
+
+No metric is perfect. 100% code coverage does not mean that there are no bugs. Critically thinking about how to discover faults will be more useful than blindly going for 100% code coverage. In certain circumstances, getting a class in the right state and to trigger a condition to observe the resulting outcome might be impossible. An advantage is that is forces the developer to think about what inputs will trigger what behaviour in their code.
+
+A good way to use it instead is to let it guide the focus of testing and inform developers about possible oversights.
+
+### Question 11
+
+A disadvantage of mock objects is that they are tightly coupled to the objects they mock which can lead to  lot of tests breaking when the original object is changed. Another problem is that static methods and objects can not be mocked.  Additionally, mocking involves a lot reflection, which means that mocks can greatly slow down test execution.  Mocking can become very complicated and thus setting up a test can become very complex  i.e. when a mock has to also  return other mocks. Finally, mocking can also lead to code being written solely for testing interactions between classes.
+
+### Question 12
+
+A test suite becomes slower over time because more code needs to be executed meaning more conditions need to be checked, more resources need to be accessed and just generally more code needs to be executed. Additionally, as the code base grows over time, a test can become slower as more and more code needs to be executed for the same test. Also, tests can become more complex and slower because more complex behavior has to be tested, i.e. a system test at the end of a coding process is more complex that one created early on.
+
+### Question 13
+
+Research has shown that people tend to use mocking when testing is difficult due to dependencies, for instance in the case when setting up is difficult or where external resources have to be accessed. The integration test level is particularly suitable for mocking as here it can be used to mock things like a database that would otherwise be difficult to get in the right state.
+
+Using a classes concrete implementation is more frequently used when the developer has more control over the code. In system tests, you never use mocks as you are interested in the actual behavior of the whole code base. Finally, when one is interested in the testing how multiple classes function as a whole, using the concrete implementation makes more sense.
+
+### Question 14
+
+Based on running JPacman for a number of times, we believe these are the issues with the code introduced by the AwesomePointCalculator:
+
+- Pacman dies around a score of 187/230
+- The blue ghost does not move (only observed ones)
+- The start/stop buttons on the end screen do not work
+- The score randomly flips and becomes negative
+- Sometimes Pacman does not consumes a pellet but instead floats over one. This is accompanied by a Runtime error that states that we found one of the solutions.
+
+### Question 15
+
+**Abnormality 1**: the score decreases by 15 points when the amount of remaining pellets is 149 or less. If the score is already a very large negative value it does not occur.
+
+Log snapshot of abnormal behaviour:
+```
+true false WEST NORTH 149 236
+true false NORTH NORTH 149 236
+true false NORTH WEST 148 221
+true false WEST EAST 148 221
+true false EAST WEST 148 221
+true false WEST NORTH 148 221
+true false NORTH NORTH 147 206
+true false NORTH SOUTH 146 191
+true false SOUTH WEST 146 191
+```
+Log snapshot of normal behaviour:
+```
+true false WEST NORTH 149 290
+true false NORTH NORTH 149 290
+true false NORTH SOUTH 148 300
+true false SOUTH SOUTH 148 300
+true false SOUTH WEST 148 300
+true false WEST WEST 147 310
+true false WEST EAST 146 320
+true false EAST SOUTH 146 320
+```
+
+**Abnormality 2**: a `RuntimeException` mentioning that an abnormality has been triggered is thrown from the `AmazingPointCalculator` and shows up in the error output stream. When this happens Pacman also does not pick up pellets. This is triggered when moving north from one of the bottom corners of the map.
+
+Screenshot of abnormal behaviour:
+
+![Abnormality 2 `AmazingPointCalculator`](images/abn_2_amazingcalc.png)
+
+Screenshot of normal behaviour:
+
+![Abnormality 2 `DefaultPointCalculator`](images/abn_2_defaultcalc.png)
+
+Stacktrace of the exception:
+
+```
+Exception in thread "AWT-EventQueue-0" java.lang.RuntimeException: Relax! You found one of the solutions!
+	at AmazingPointCalculator.consumedAPellet(AmazingPointCalculator.java:50)
+	at nl.tudelft.jpacman.level.PlayerCollisions.playerVersusPellet(PlayerCollisions.java:91)
+	at nl.tudelft.jpacman.level.PlayerCollisions.playerColliding(PlayerCollisions.java:51)
+	at nl.tudelft.jpacman.level.PlayerCollisions.collide(PlayerCollisions.java:36)
+	at nl.tudelft.jpacman.level.Level.move(Level.java:190)
+	at nl.tudelft.jpacman.game.Game.move(Game.java:102)
+	at nl.tudelft.jpacman.Launcher.lambda$moveTowardsDirection$0(Launcher.java:168)
+	at nl.tudelft.jpacman.ui.PacKeyListener.keyPressed(PacKeyListener.java:33)
+	at java.desktop/java.awt.Component.processKeyEvent(Component.java:6590)
+	at java.desktop/java.awt.Component.processEvent(Component.java:6409)
+	at java.desktop/java.awt.Container.processEvent(Container.java:2263)
+	at java.desktop/java.awt.Window.processEvent(Window.java:2049)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:5008)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2321)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2772)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4840)
+	at java.desktop/java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1950)
+	at java.desktop/java.awt.DefaultKeyboardFocusManager.dispatchKeyEvent(DefaultKeyboardFocusManager.java:871)
+	at java.desktop/java.awt.DefaultKeyboardFocusManager.preDispatchKeyEvent(DefaultKeyboardFocusManager.java:1140)
+	at java.desktop/java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:1010)
+	at java.desktop/java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:836)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2321)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2772)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4840)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:772)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:743)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+```
+
+**Abnormality 3**: when the amount of pellets remaining gets below 144 and Pacman moves to a direction that is not north, Pacman dies, even when there is no ghost in any adjacent square.
+
+Log snapshot 1 of abnormal behaviour:
+```
+true false NORTH EAST 145 176
+true false EAST SOUTH 144 161
+true false SOUTH EAST 144 161
+false false EAST EAST 143 146
+```
+Log snapshot 2 of abnormal behaviour:
+```
+true false WEST WEST 145 -2147483348
+true false WEST NORTH 144 309
+true false NORTH WEST 144 309
+false false WEST WEST 143 -2147483355
+```
+Log snapshot 3 of abnormal behaviour:
+```
+true false NORTH SOUTH 144 188
+true false SOUTH NORTH 144 188
+true false NORTH EAST 144 188
+false false EAST EAST 143 173
+```
+Log snapshot 1 of normal behaviour:
+```
+true false NORTH EAST 144 340
+true false EAST SOUTH 143 350
+true false SOUTH EAST 143 350
+true false EAST NORTH 142 360
+true false NORTH EAST 142 360
+true false EAST WEST 141 370
+true false WEST SOUTH 141 370
+true false SOUTH NORTH 141 370
+true false NORTH SOUTH 141 370
+```
+Log snapshot 2 of normal behaviour:
+```
+true false EAST WEST 143 350
+true false WEST NORTH 143 350
+true false NORTH WEST 143 350
+true false WEST EAST 143 350
+true false EAST SOUTH 143 350
+true false SOUTH EAST 143 350
+true false EAST NORTH 143 350
+true false NORTH WEST 142 360
+true false WEST NORTH 142 360
+```
+**Abnormality 4**: when the amount of pellets remaining gets below 163 and Pacman moves west, then a very large number is added to the score that causes an integer overflow error. 
+
+Log snapshot 1 of abnormal behaviour:
+```
+true false WEST WEST 163 150
+true false WEST EAST 162 -2147483489
+true false EAST WEST 162 -2147483489
+true false WEST WEST 162 -2147483489
+true false WEST WEST 162 -2147483489
+true false WEST SOUTH 161 168
+```
+Log snapshot 2 of abnormal behaviour:
+```
+true false SOUTH WEST 160 180
+true false WEST SOUTH 159 -2147483459
+true false SOUTH SOUTH 159 -2147483459
+true false SOUTH WEST 159 -2147483459
+true false WEST NORTH 158 198
+```
+Log snapshot 3 of abnormal behaviour:
+```
+true false NORTH WEST 153 250
+true false WEST NORTH 152 -2147483389
+true false NORTH SOUTH 152 -2147483389
+true false SOUTH WEST 152 -2147483389
+true false WEST NORTH 151 268
+```
+Log snapshot 1 of normal behavior
+```
+true false NORTH NORTH 164 140
+true false NORTH WEST 163 150
+true false WEST SOUTH 163 150
+true false SOUTH EAST 163 150
+```
+Log snapshot 2 of normal behavior
+```
+true false SOUTH SOUTH 164 140
+true false SOUTH SOUTH 163 150
+true false SOUTH WEST 162 160
+true false WEST WEST 162 160
+true false WEST EAST 162 160
+true false EAST EAST 162 160
+true false EAST EAST 162 160
+true false EAST EAST 162 160
+true false EAST SOUTH 162 160
+true false SOUTH SOUTH 161 170
+```
+Log snapshot 3 of normal behavior
+```
+true false WEST NORTH 164 140
+true false NORTH SOUTH 163 150
+true false SOUTH EAST 163 150
+true false EAST NORTH 163 150
+true false NORTH EAST 163 150
+true false EAST NORTH 163 150
+true false NORTH WEST 163 150
+true false WEST WEST 162 160
+true false WEST WEST 161 170
+true false WEST WEST 160 180
+true false WEST SOUTH 159 190
+true false SOUTH WEST 159 190
+```
+
+### Question 16
+
+After running the `staticAnalysis` task, we did not see any security warnings associated to this piece of code because static analysis can only analyse source code and thus can not see into the code of third-party plugins. Additionally, research has revealed that Static Analysis tools in general are not very good in finding bugs and have limited capabilities, even the commercial ones.
+
+We can see two vulnerabilities in the code. On the one hand, the scorecalc.properties file can easily be manipulated to read in any plugin and its code; thus JPacMan is very vulnerable to injections. On the other hand, the usage of the plugin without any verification, authentication or security check means that program uses plugins from questionable backgrounds.
+
+Based on these facts, we believe that the corresponding OWASP Top 10 vulnerability of 2017 is "A9:2017-Using Components with Known Vulnerabilities" because this fits perfectly this scenario as here, we use a plugin without any security measures or without looking any further into who has created it and for what purpose.
+
+### Question 17
+
+- Create a custom class loader in which the parts of the system the plugin has access to are limited.
+- Using Java's `SecurityManager` to set the permissions that the plugin is given and deny access to resources that should be out of bouns
+- Run the plugin in its own JVM.
+- Avoid situations in which you have to use plugins from untrustworthy backgrounds
+- When having to use a plugin, make sure it is reputable and does not have any known security vulnerabilities
+
+https://stackoverflow.com/questions/502218/sandbox-against-malicious-code-in-a-java-application is used as a source in this question.
+
+### Conclusion
+
+As we reach this stage of the report, our code is ready for submission. We eliminated any  Checkstyle, PMD and Spotbugs violations as we continuously ran these plugins to get rid of any error when they popped up and only committed once we were very sure everything is in order. Through this assignment, the adequacy of JPacMan has increased even more as now we have demonstrated that start method of the Game class, as well as the collision mechanics represented by the CollisionMap, DefaultPlayerInteraction and PlayerCollision classes work as expected. Additionally, we have pointed out one security flaw of the code, namely the dynamically loaded plugin `AwesomeScoreCalculator`. In the end, we we committed and pushed onto a distinct branch for every section of the assignment and we have switched who actually did these tasks.
