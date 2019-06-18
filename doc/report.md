@@ -333,3 +333,66 @@ https://stackoverflow.com/questions/502218/sandbox-against-malicious-code-in-a-j
 ### Conclusion
 
 As we reach this stage of the report, our code is ready for submission. We eliminated any  Checkstyle, PMD and Spotbugs violations as we continuously ran these plugins to get rid of any error when they popped up and only committed once we were very sure everything is in order. Through this assignment, the adequacy of JPacMan has increased even more as now we have demonstrated that start method of the Game class, as well as the collision mechanics represented by the CollisionMap, DefaultPlayerInteraction and PlayerCollision classes work as expected. Additionally, we have pointed out one security flaw of the code, namely the dynamically loaded plugin `AwesomeScoreCalculator`. In the end, we we committed and pushed onto a distinct branch for every section of the assignment and we have switched who actually did these tasks.
+
+## Assignment 3
+
+### Question 3
+
+If we wanted to use the original map to test these scenarios it would be almost impossible to control or predict the location of the ghosts. The goals of the two scenarios basically come down to purposefully losing and winning the game, which are very difficult to ensure using the default map. Pacman has to be killed by a ghost, as killing him directly is not possible and would defeat the purpose. Because of this the tests would at best be very flaky. The circumstances are not as easy to control as with unit tests. To remedy this we will use other maps where the circumstances are easier to control and the aforementioned goals are actually possible to obtain reliably.
+
+### Question 5
+
+The problem that the positioning of the ghosts is very hard to control precisely when only the player movement can be directly controlled, is also what makes this story hard to test. The map needs to be simplified in order to achieve this.
+
+### Exercise 6
+
+![Single State Machine](images/singlelevel_state_machine.png)
+        
+### Exercise 7
+        
+![SingleLevel Transition Tree](images/singlelevel_transition_tree.jpg)
+
+### Exercise 8
+        
+![SingleLevel Transition Table](images/singlelevel_transition_table.PNG)
+        
+As can be seen from the image below, the test cases that are not contained in the state machine are the sneaky paths, colored in dark blue. We do think additional test cases are needed to see whether or not it is indeed not possible to move between those states or whether some unintended means of transitioning was implemented. Thus, test cases for these (state,event) pairs were created.
+
+### Exercise 9
+
+We did not think we need additional test cases as already all possible state/event pair combinations were covered and as we already achieved 100% line, statement, branch and condition coverage. 
+
+### Exercise 11
+
+![MultiLevel Transition Tree](images/multilevel_transition_tree.PNG)
+
+![MultiLevel State Machine](images/multilevel_state_machine.png)
+
+#### Exercise 12
+
+![MultiLevel Transition Table](images/multilevel_transition_table.PNG)
+    
+New test cases that have to be derived from the new state machine are those that test the transition from the "Won" state when pressing the start button. Thus, it has to be tested that when the level 1,2 or 3 is won and the start button is pressed, the result is that the next level is loaded and that the game, the player and his/her score remains the same.
+
+The test cases that have to be adopted are those that test what happens when a player wins the final level. Thus, it has to be tested that when the level 4 is won and the start button is pressed, nothing happens. 
+
+The test cases that can be reused are all the other ones as the remaining state/event pairs are also valid for the new state machine. 
+
+ ### Exercise 18
+ 
+ The coverage achieved for our multi-level implementation was 100% line, statement, branch and condition coverage for the MultiLevelLauncher class and 100% line, statement and condition coverage for the MultiLevelGame class with 60% branch coverage. After thorough analysis, we concluded that the reason why we did not achieve 100% coverage was due to the usage of the lazy `&&` operators in the condition statements for the `start` method. We do believe that we hit every achievable combination of inputs so we do think that the correct amount of branch coverage we actually achieve for the MultiLevelGame class is 100%. Therefore, we do believe that we have achieve a satisfactory level of coverage for the newly created classes. 
+ 
+### Exercise 19
+
+In conclusion, 
+
+Good side:
+ - Some parts of the code, for instance the game class, are easily extended and adopted for new use cases, as can be seen by our MultiLevelGame class. Even though the game was not designed with this usage in mind, due to the well-structured abstraction layers, we were nonetheless capable of implementing this functionality with relatively few lines of code. 
+ - Creating tests that rely on mocking was relatively easy as the dependency injection pattern was used frequently. 
+ - Due to the fact that the classes and methods are not too big as well as the clear variable names, the code was relatively easy to read and understand from as someone unfamiliar with the code base.
+    
+Bad side:
+ - A lot of classes are not designed for extendability, for instance many attributes and methods are made private. To use these attributes and methods in a new class, a lot of code would have to be duplicated which could be avoided if they were made protected for instance.
+ - Testing on the level of the UI or the testing the actual user interaction with the UI is impossible to achieve in the current from of the code. We propose an additional level of abstraction on top of the UI elements that is accessible when writing tests i.e. a screen or a button class.
+ - There is almost no separate documentation available outside of the scenario and the JavaDoc's themselves are lacking. Especially the interaction of components is not well explained. A solution to this problem could be a separate manual that explains these topics in greater detail or better JavaDoc. 
+ 

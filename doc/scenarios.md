@@ -145,6 +145,26 @@ When  the player hits the "Start" button;
 Then  the game is resumed.
 ```
 
+## Story 5: Start another game after winning
+
+```
+As a player,
+ I want to be able to play another game after winning a game;
+So  that I do not have to restart the whole program to play some more.
+
+Scenario S5.1: Play a new level after winning.
+Given the player has won this level;
+When  the player clicks the "Start" button;
+Then  the level resets;
+ and  my points stay the same. 
+
+Scenario S5.2: Game stops after four levels.
+Given the player has won the three previous levels;
+When  the player has consumed the last pellet;
+Then  I win the game;
+ and another level does not get reset. 
+``` 
+
 ## 3. User Interface
 
 The user interface for JPacman is relatively simple.  The game is
@@ -162,6 +182,8 @@ the play).
 
 JPacman should be developed in Java. It should be set up so that it
 can easily be used by (the latest versions of) standard (open source) Java development tools, such as maven, JUnit, Eclipse/IntelliJ, cobertura, etc. To allow for working with maven, the maven standard directory structure should be used.  Since the educational purposes include testing, JPacman should be delivered with an extensive test suite.
+
+
 
 ----
 [![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
