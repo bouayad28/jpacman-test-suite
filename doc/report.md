@@ -346,11 +346,11 @@ The problem that the positioning of the ghosts is very hard to control precisely
 
 ### Exercise 6
 
-![Single State Machine](images/singlelevel_state_machine.png)
+![Single State Machine](images/singlelevel_state_machine.jpeg)
         
 ### Exercise 7
         
-![SingleLevel Transition Tree](images/singlelevel_transition_tree.jpg)
+![SingleLevel Transition Tree](images/singlelevel_transition_tree.PNG)
 
 ### Exercise 8
         
@@ -366,7 +366,7 @@ We did not think we need additional test cases as already all possible state/eve
 
 ![MultiLevel Transition Tree](images/multilevel_transition_tree.PNG)
 
-![MultiLevel State Machine](images/multilevel_state_machine.png)
+![MultiLevel State Machine](images/multilevel_state_machine.jpeg)
 
 #### Exercise 12
 
