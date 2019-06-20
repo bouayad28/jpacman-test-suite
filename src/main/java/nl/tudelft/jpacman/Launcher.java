@@ -203,11 +203,16 @@ public class Launcher {
      * Main execution method for the Launcher.
      *
      * @param args
-     *            The command line arguments - which are ignored.
+     *            The command line arguments. The first and only option {@code --singlelevel} can be
+     *            used to disable the multiple levels feature.
      * @throws IOException
      *             When a resource could not be read.
      */
     public static void main(String[] args) throws IOException {
-        new Launcher().launch();
+        if (args.length > 0 && args[0].equals("--singlelevel")) {
+            new Launcher().launch();
+        } else {
+            new MultiLevelLauncher().launch();
+        }
     }
 }
