@@ -67,7 +67,7 @@ public class Player extends Unit {
     /**
      * Sets whether this player is alive or not.
      *
-     * If the player comes back alive, the {@link killer} will be reset.
+     * If the player comes back alive, the {@link #killer} will be reset.
      *
      * @param isAlive
      *            <code>true</code> iff this player is alive.
