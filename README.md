@@ -1,4 +1,4 @@
-<img src=img/jpacman_logo.png alt="The Green Thumb Logo" width="258" height="266">
+<img src=img/jpacman_logo.png alt="The Green Thumb Logo" width="129" height="133">
 
 --------------------------------------------------------------------------------
 [![MIT License](https://img.shields.io/badge/license-Apache_2.0-green.svg)](https://github.com/johanneshagspiel/jpacman-test-suite/Apache-2.0-LICENSE.txt)
