@@ -2,10 +2,8 @@
 
 --------------------------------------------------------------------------------
 [![MIT License](https://img.shields.io/badge/license-Apache_2.0-green.svg)](https://github.com/johanneshagspiel/jpacman-test-suite/Apache-2.0-LICENSE.txt)
-[![Top Language](https://img.shields.io/github/languages/top/johanneshagspiel/jpacman-test-suite
-)](https://github.com/johanneshagspiel/jpacman-test-suite)
-[![Latest Release](https://img.shields.io/github/v/release/johanneshagspiel/jpacman-test-suite
-)](https://github.com/johanneshagspiel/jpacman-test-suite/releases/)
+[![Top Language](https://img.shields.io/github/languages/top/johanneshagspiel/jpacman-test-suite)](https://github.com/johanneshagspiel/jpacman-test-suite)
+[![Latest Release](https://img.shields.io/github/v/release/johanneshagspiel/jpacman-test-suite)](https://github.com/johanneshagspiel/jpacman-test-suite/releases/)
 
 # JPacman Test Suite
 
@@ -15,14 +13,14 @@ This repository contains the [test suite](https://github.com/johanneshagspiel/jp
 
 The [test suite](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman) contains a variety of different test such as:
 
-- [unit](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman/npc/ghost/ClydeTest.java) [tests](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman/npc/ghost/InkyTest.java) made with [JUnit](https://junit.org/junit5/)
-- [boundary tests](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman/board/WithinBordersTest.java) using a 1x1 domain testing strategy
-- [tests](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman/level/CollisionMapTest.java) made with [Mockito](https://site.mockito.org/) to increase observability and controllability
-- [fuzz testing](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/default-test/java/nl/tudelft/jpacman/fuzzer/JPacmanFuzzer.java) to determine a potential security vulnerability of a plugin
-- [system tests](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman/integration/suspension/SuspendSystemTest.java) based on system requirements
-- [model based tests](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman/integration/GameStateTest.java) for which first a [UML state machine](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/doc/images/singlelevel_state_machine.jpeg) was created which then was turned into a [transition tree](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/doc/images/singlelevel_transition_tree.PNG) and then finally into a [transition table](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/doc/images/singlelevel_transition_table.PNG)
+- unit tests made with [JUnit](https://junit.org/junit5/)
+- boundary tests using a 1x1 domain testing strategy
+- mock tests made with [Mockito](https://site.mockito.org/) to increase observability and controllability
+- fuzz testing to determine a potential security vulnerability of a plugin
+- system tests based on system requirements
+- model based tests, for which first a UML state machine was created which then was turned into a transition tree and then finally into a transition table
 
-Most of these tests were created directly on the basis of user stories found in the [requirements document](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/doc/scenarios.md) in line with agile methodologies. Finally, "JPacman's" functionality was extended in a test-driven manner in order to support [multi-level games](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/main/java/nl/tudelft/jpacman/game/MultiLevelGame.java)
+Most of these tests were created directly on the basis of user stories in line with agile methodologies. Finally, "JPacman's" functionality was extended in a test-driven manner in order to support multi-level games.
 
 ## Tools
 
