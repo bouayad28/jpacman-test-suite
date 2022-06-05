@@ -7,11 +7,11 @@
 
 # JPacman Test Suite
 
-This repository contains the [test suite](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman) created for the "JPacman" game. "JPacman" was originally developed by [Arie van Deursen](https://github.com/avandeursen) and is a recreation of the "Pacman" game in Java.
+This repository contains the test suite created for the "JPacman" game. "JPacman" was originally developed by [Arie van Deursen](https://github.com/avandeursen) and is a recreation of the "Pacman" game in Java.
 
 ## Features
 
-The [test suite](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman) contains a variety of different test such as:
+The test suite contains a variety of different test such as:
 
 - unit tests made with [JUnit](https://junit.org/junit5/)
 - boundary tests using a 1x1 domain testing strategy
@@ -39,12 +39,12 @@ Most of these tests were created directly on the basis of user stories in line w
 It is assumed that both a [Java JDK](https://openjdk.org/) and an IDE such as [IntelliJ](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/) are installed.
 
 - Import the repository as a gradle project and resolve all dependencies.
-- Run the game by executing the main method in the [Launcher class](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/main/java/nl/tudelft/jpacman/Launcher.java).
-- Execute the tests in the [test suite](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/src/test/java/nl/tudelft/jpacman)
+- Run the game by executing the main method in the [Launcher class](src/main/java/nl/tudelft/jpacman/Launcher.java).
+- Execute the tests in the [test suite](src/test/java/nl/tudelft/jpacman)
 
 ## Contributors
 
-The authors of the "JPacman" game can be found [AUTHORS](https://github.com/johanneshagspiel/jpacman-test-suite/tree/master/AUTHORS.md) file and the repository of the original source code can be found [here](https://github.com/SERG-Delft/jpacman-framework).
+The authors of the "JPacman" game can be found [AUTHORS](AUTHORS.md) file and the repository of the original source code can be found [here](https://github.com/SERG-Delft/jpacman-framework).
 
 This test suite was created together with:
 
