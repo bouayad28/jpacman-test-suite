@@ -24,14 +24,15 @@ Most of these tests were created directly on the basis of user stories in line w
 
 ## Tools
 
-| Purpose                | Name                                                                                                                     |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| Programming language   | [Java](https://openjdk.org/)                                                                                             |
-| Dependency manager     | [Gradle]()                                                                                                               |
+| Purpose               | Name                                                                                                                     |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Programming language  | [Java](https://openjdk.org/)                                                                                             |
+| Dependency manager    | [Gradle]()                                                                                                               |
 | Version control system | [Git](https://git-scm.com/)                                                                                              |
 | Unit testing framework | [JUnit](https://junit.org/junit5/)                                                                                       |
-| Mocking framework      | [Mockito](https://site.mockito.org/)                                                                                     |
-| Static analysis tools  | [checkstyle](https://checkstyle.sourceforge.io/), [PMD](https://pmd.github.io/), [SpotBugs](https://spotbugs.github.io/) |
+| Mocking framework     | [Mockito](https://site.mockito.org/)                                                                                     |
+| Code coverage tool    | [JaCoCo](https://www.jacoco.org/jacoco/)                                                                                     |
+| Static analysis tools | [checkstyle](https://checkstyle.sourceforge.io/), [PMD](https://pmd.github.io/), [SpotBugs](https://spotbugs.github.io/) |
 
 
 ## Installation Process
