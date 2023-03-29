@@ -19,20 +19,21 @@ The test suite contains a variety of different test such as:
 - fuzz testing to determine a potential security vulnerability of a plugin
 - system tests based on system requirements
 - model based tests, for which first a UML state machine was created which then was turned into a transition tree and then finally into a transition table
+- quality control with code coverage library [JaCoCo](https://www.jacoco.org/jacoco/) and static analysis tools like [checkstyle](https://checkstyle.sourceforge.io/), [PMD](https://pmd.github.io/) and [SpotBugs](https://spotbugs.github.io/)
 
 Most of these tests were created directly on the basis of user stories in line with agile methodologies. Finally, "JPacman's" functionality was extended in a test-driven manner in order to support multi-level games.
 
 ## Tools
 
-| Purpose               | Name                                                                                                                     |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------|
-| Programming language  | [Java](https://openjdk.org/)                                                                                             |
-| Dependency manager    | [Gradle]()                                                                                                               |
+| Purpose                | Name                                                                                                                     |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Programming language   | [Java](https://openjdk.org/)                                                                                             |
+| Dependency manager     | [Gradle]()                                                                                                               |
 | Version control system | [Git](https://git-scm.com/)                                                                                              |
 | Unit testing framework | [JUnit](https://junit.org/junit5/)                                                                                       |
-| Mocking framework     | [Mockito](https://site.mockito.org/)                                                                                     |
-| Code coverage tool    | [JaCoCo](https://www.jacoco.org/jacoco/)                                                                                     |
-| Static analysis tools | [checkstyle](https://checkstyle.sourceforge.io/), [PMD](https://pmd.github.io/), [SpotBugs](https://spotbugs.github.io/) |
+| Mocking framework      | [Mockito](https://site.mockito.org/)                                                                                     |
+| Code coverage library  | [JaCoCo](https://www.jacoco.org/jacoco/)                                                                                     |
+| Static analysis tools  | [checkstyle](https://checkstyle.sourceforge.io/), [PMD](https://pmd.github.io/), [SpotBugs](https://spotbugs.github.io/) |
 
 
 ## Installation Process
